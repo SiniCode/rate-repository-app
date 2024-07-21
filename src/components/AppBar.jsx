@@ -10,8 +10,10 @@ const styles = StyleSheet.create({
 		height: 80,
 		backgroundColor: theme.colors.backgroundDark,
 		display: 'flex',
-		alignItems: 'flex-start',
-		justifyContent: 'flex-end',
+		flexDirection: 'row',
+		alignItems: 'flex-end',
+		justifyContent: 'flex-start',
+		gap: 20,
 	},
 	item: {
 		color: 'white',
@@ -21,7 +23,8 @@ const styles = StyleSheet.create({
 const AppBar = () => {
 	return (
 		<View style={styles.container}>
-			<AppBarTab text='Repositories' style={styles.item} />
+			<AppBarTab text='Repositories' route='/' style={styles.item} />
+			<AppBarTab text='Sign in' route='/sign-in' style={styles.item} />
 		</View>
 	);
 };

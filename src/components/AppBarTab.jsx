@@ -1,17 +1,13 @@
-import { Pressable } from 'react-native';
+import { Link } from 'react-router-native';
 import Text from './Text';
 
-const AppBarTab = ({ text, style }) => {
-	const handlePress = () => {
-		console.log('App bar tab was pressed');
-	};
-
+const AppBarTab = ({ text, route, style }) => {
 	return (
-		<Pressable onPress={handlePress}>
+		<Link to={route}>
 			<Text fontWeight='bold' fontSize='subheading' style={style}>
 				{text}
 			</Text>
-		</Pressable>
+		</Link>
 	);
 };
 
