@@ -6,15 +6,15 @@ import AppBarTab from './AppBarTab';
 const styles = StyleSheet.create({
 	container: {
 		marginTop: Constants.statusBarHeight,
-		padding: 10,
+		padding: 20,
 		height: 80,
-		backgroundColor: theme.colors.appBarBackRound,
+		backgroundColor: theme.colors.backgroundDark,
 		display: 'flex',
 		alignItems: 'flex-start',
 		justifyContent: 'flex-end',
 	},
 	item: {
-		color: theme.colors.appBarText,
+		color: 'white',
 	},
 });
 
