@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
 	},
 	description: {
 		flex: 1,
-		width: 250,
+		maxWidth: 260,
 	},
 });
 
