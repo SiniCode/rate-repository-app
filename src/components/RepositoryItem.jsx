@@ -88,7 +88,7 @@ const InfoComponent = (props) => {
 
 const RepositoryItem = ({ repositoryObject }) => {
 	return (
-		<View style={styles.container}>
+		<View testID='repositoryItem' style={styles.container}>
 			<Image
 				style={styles.image}
 				source={{ uri: repositoryObject.ownerAvatarUrl }}
