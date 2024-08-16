@@ -1,4 +1,5 @@
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, Pressable, StyleSheet } from 'react-native';
+import { openURL } from 'expo-linking';
 import Text from './Text';
 import theme from '../theme';
 
@@ -42,8 +43,14 @@ const styles = StyleSheet.create({
 		gap: 10,
 	},
 	description: {
-		flex: 1,
-		maxWidth: 260,
+		width: 290,
+	},
+	urlButton: {
+		borderRadius: 5,
+		backgroundColor: theme.colors.primary,
+		padding: 10,
+		width: '100%',
+		alignItems: 'center',
 	},
 });
 
@@ -70,23 +77,23 @@ const NumberComponent = (props) => {
 	);
 };
 
-const InfoComponent = (props) => {
+const InfoComponent = ({ name, description, language }) => {
 	return (
 		<View style={styles.info}>
 			<Text fontSize='subheading' fontWeight='bold'>
-				{props.name}
+				{name}
 			</Text>
 			<View style={styles.description}>
-				<Text color='textSecondary'>{props.description}</Text>
+				<Text color='textSecondary'>{description}</Text>
 			</View>
 			<View style={styles.languageChip}>
-				<Text style={{ color: 'white' }}>{props.language}</Text>
+				<Text style={{ color: 'white' }}>{language}</Text>
 			</View>
 		</View>
 	);
 };
 
-const RepositoryItem = ({ repositoryObject }) => {
+const RepositoryItem = ({ repositoryObject, urlButton }) => {
 	return (
 		<View testID='repositoryItem' style={styles.container}>
 			<Image
@@ -105,6 +112,16 @@ const RepositoryItem = ({ repositoryObject }) => {
 				<NumberComponent num={repositoryObject.reviewCount} title='Reviews' />
 				<NumberComponent num={repositoryObject.ratingAverage} title='Rating' />
 			</View>
+			{urlButton && (
+				<Pressable
+					style={styles.urlButton}
+					onPress={() => openURL(repositoryObject.url)}
+				>
+					<Text fontWeight='bold' style={{ color: 'white' }}>
+						Open in GitHub
+					</Text>
+				</Pressable>
+			)}
 		</View>
 	);
 };
