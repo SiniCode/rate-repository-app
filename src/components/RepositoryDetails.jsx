@@ -53,7 +53,9 @@ const ReviewItem = ({ review }) => {
 					{format(new Date(review.createdAt), 'dd/MM/yyyy')}
 				</Text>
 			</View>
-			<Text>{review.text}</Text>
+			<View style={{ width: '100%' }}>
+				<Text>{review.text}</Text>
+			</View>
 		</View>
 	);
 };

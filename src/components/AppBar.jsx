@@ -34,6 +34,13 @@ const AppBar = () => {
 					<AppBarTab text='Sign in' route='/sign-in' style={styles.item} />
 				)}
 				{user && (
+					<AppBarTab
+						text='Create a review'
+						route='/create-review'
+						style={styles.item}
+					/>
+				)}
+				{user && (
 					<AppBarTab text='Sign out' route='/sign-out' style={styles.item} />
 				)}
 			</ScrollView>
