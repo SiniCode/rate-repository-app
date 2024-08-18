@@ -33,6 +33,9 @@ const AppBar = () => {
 				{!user && (
 					<AppBarTab text='Sign in' route='/sign-in' style={styles.item} />
 				)}
+				{!user && (
+					<AppBarTab text='Sign up' route='/sign-up' style={styles.item} />
+				)}
 				{user && (
 					<AppBarTab
 						text='Create a review'
