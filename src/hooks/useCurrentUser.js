@@ -2,8 +2,10 @@ import { useQuery } from '@apollo/client';
 
 import { CURRENT_USER } from '../graphql/queries';
 
-const useCurrentUser = () => {
-	const { data, error, loading } = useQuery(CURRENT_USER);
+const useCurrentUser = ({ includeReviews }) => {
+	const { data, error, loading } = useQuery(CURRENT_USER, {
+		variables: { includeReviews },
+	});
 
 	if (error) {
 		console.log(error.message);

@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-import { REPOSITORY_INFO } from './fragments';
+import { REPOSITORY_INFO, REVIEW_INFO } from './fragments';
 
 export const GET_REPOSITORIES = gql`
 	query getRepositories(
@@ -25,27 +25,32 @@ export const GET_REPOSITORY = gql`
 			reviews {
 				edges {
 					node {
-						id
-						text
-						rating
-						createdAt
-						user {
-							id
-							username
-						}
+						...ReviewInfo
 					}
 				}
 			}
 		}
 	}
 	${REPOSITORY_INFO}
+	${REVIEW_INFO}
 `;
 
 export const CURRENT_USER = gql`
-	query {
+	query currentUser($includeReviews: Boolean = false) {
 		me {
 			id
 			username
+			reviews @include(if: $includeReviews) {
+				edges {
+					node {
+						...ReviewInfo
+						repository {
+							fullName
+						}
+					}
+				}
+			}
 		}
 	}
+	${REVIEW_INFO}
 `;

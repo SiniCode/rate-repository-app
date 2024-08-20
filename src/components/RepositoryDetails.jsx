@@ -39,7 +39,7 @@ const RepositoryInfo = ({ repository }) => {
 	return <RepositoryItem repositoryObject={repository} urlButton={true} />;
 };
 
-const ReviewItem = ({ review }) => {
+export const ReviewItem = ({ review, byNameOf }) => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.rating}>
@@ -47,7 +47,9 @@ const ReviewItem = ({ review }) => {
 			</View>
 			<View style={styles.info}>
 				<Text fontSize='subheading' fontWeight='bold'>
-					{review.user.username}
+					{byNameOf === 'user'
+						? review.user.username
+						: review.repository.fullName}
 				</Text>
 				<Text color='textSecondary'>
 					{format(new Date(review.createdAt), 'dd/MM/yyyy')}
@@ -76,7 +78,7 @@ const RepositoryDetails = () => {
 	return (
 		<FlatList
 			data={reviews}
-			renderItem={({ item }) => <ReviewItem review={item} />}
+			renderItem={({ item }) => <ReviewItem review={item} byNameOf='user' />}
 			keyExtractor={({ id }) => id}
 			ListHeaderComponent={() => <RepositoryInfo repository={repository} />}
 		/>

@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
 });
 
 const AppBar = () => {
-	const { user } = useCurrentUser();
+	const { user } = useCurrentUser({ includeReviews: false });
 
 	return (
 		<View style={styles.container}>
@@ -40,6 +40,13 @@ const AppBar = () => {
 					<AppBarTab
 						text='Create a review'
 						route='/create-review'
+						style={styles.item}
+					/>
+				)}
+				{user && (
+					<AppBarTab
+						text='My reviews'
+						route='/my-reviews'
 						style={styles.item}
 					/>
 				)}
