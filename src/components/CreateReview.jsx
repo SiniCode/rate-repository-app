@@ -1,35 +1,11 @@
-import { TextInput, Pressable, View, StyleSheet } from 'react-native';
+import { TextInput, Pressable, View } from 'react-native';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useNavigate } from 'react-router-native';
 import Text from './Text';
 import theme from '../theme';
+import { formStyles } from '../styles/formStyles';
 import useCreateReview from '../hooks/useCreateReview';
-
-const styles = StyleSheet.create({
-	container: {
-		padding: 20,
-		maxWidth: 460,
-		display: 'flex',
-		gap: 10,
-		backgroundColor: 'white',
-	},
-	input: {
-		padding: 10,
-		fontFamily: theme.fonts.main,
-		fontSize: theme.fontSizes.body,
-		color: theme.colors.textSecondary,
-		borderRadius: 5,
-		borderColor: theme.colors.backgroundDark,
-		borderWidth: 1,
-	},
-	button: {
-		padding: 10,
-		backgroundColor: theme.colors.primary,
-		borderRadius: 5,
-		alignItems: 'center',
-	},
-});
 
 const validationSchema = yup.object().shape({
 	owner: yup.string().required('Repository owner is required'),
@@ -57,13 +33,13 @@ export const ReviewForm = ({ onSubmit }) => {
 	});
 
 	return (
-		<View style={styles.container}>
+		<View style={formStyles.container}>
 			<TextInput
 				placeholder='Repository owner'
 				value={formik.values.owner}
 				onChangeText={formik.handleChange('owner')}
 				style={[
-					styles.input,
+					formStyles.input,
 					{
 						borderColor:
 							formik.touched.owner && formik.errors.owner && theme.colors.error,
@@ -78,7 +54,7 @@ export const ReviewForm = ({ onSubmit }) => {
 				value={formik.values.name}
 				onChangeText={formik.handleChange('name')}
 				style={[
-					styles.input,
+					formStyles.input,
 					{
 						borderColor:
 							formik.touched.name && formik.errors.name && theme.colors.error,
@@ -93,7 +69,7 @@ export const ReviewForm = ({ onSubmit }) => {
 				value={formik.values.rating}
 				onChangeText={formik.handleChange('rating')}
 				style={[
-					styles.input,
+					formStyles.input,
 					{
 						borderColor:
 							formik.touched.rating &&
@@ -113,7 +89,7 @@ export const ReviewForm = ({ onSubmit }) => {
 				value={formik.values.review}
 				onChangeText={formik.handleChange('review')}
 				style={[
-					styles.input,
+					formStyles.input,
 					{
 						borderColor:
 							formik.touched.review &&
@@ -127,7 +103,7 @@ export const ReviewForm = ({ onSubmit }) => {
 					{formik.errors.review}
 				</Text>
 			)}
-			<Pressable onPress={formik.handleSubmit} style={styles.button}>
+			<Pressable onPress={formik.handleSubmit} style={formStyles.button}>
 				<Text fontWeight='bold' style={{ color: 'white' }}>
 					Create review
 				</Text>

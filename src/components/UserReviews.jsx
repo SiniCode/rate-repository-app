@@ -13,6 +13,7 @@ const confirmDeletion = ({ deleteFn, id }) => {
 		{ text: 'Delete', onPress: () => deleteFn({ id }) },
 	]);
 };
+
 const UserReviews = () => {
 	const navigate = useNavigate();
 	const [deleteReview] = useDeleteReview();

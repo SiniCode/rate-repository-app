@@ -15,7 +15,7 @@ const RepositoryDetails = () => {
 	const { repository } = useRepository({ id });
 
 	if (!repository) {
-		return <Text>Something went wrong</Text>;
+		return <Text>Fetching repository details...</Text>;
 	}
 
 	const reviews = repository

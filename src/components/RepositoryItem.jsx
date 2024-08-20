@@ -1,76 +1,12 @@
-import { View, Image, Pressable, StyleSheet } from 'react-native';
+import { View, Image, Pressable } from 'react-native';
 import { openURL } from 'expo-linking';
 import Text from './Text';
-import theme from '../theme';
-
-const styles = StyleSheet.create({
-	container: {
-		padding: 20,
-		maxWidth: 460,
-		display: 'flex',
-		flexDirection: 'row',
-		flexWrap: 'wrap',
-		gap: 25,
-		backgroundColor: 'white',
-	},
-	image: {
-		width: 50,
-		height: 50,
-		borderRadius: 5,
-	},
-	numberComponent: {
-		display: 'flex',
-		alignItems: 'center',
-		gap: 10,
-	},
-	numbersSection: {
-		display: 'flex',
-		flexDirection: 'row',
-		justifyContent: 'space-around',
-		width: '100%',
-	},
-	languageChip: {
-		borderRadius: 5,
-		backgroundColor: theme.colors.primary,
-		width: 'fit-content',
-		height: 'fit-content',
-		padding: 6,
-	},
-	info: {
-		display: 'flex',
-		justifyContent: 'space-between',
-		alignItems: 'flex-start',
-		gap: 10,
-	},
-	description: {
-		width: 290,
-	},
-	urlButton: {
-		borderRadius: 5,
-		backgroundColor: theme.colors.primary,
-		padding: 10,
-		width: '100%',
-		alignItems: 'center',
-	},
-});
-
-const formatNumber = (num) => {
-	if (num < 1000) {
-		return `${num}`;
-	}
-
-	const rounded = (num / 1000).toFixed(1);
-
-	if (rounded.endsWith('0')) {
-		return `${rounded.split('.')[0]}k`;
-	}
-
-	return `${rounded}k`;
-};
+import { repositoryItemStyles } from '../styles/repositoryItemStyles';
+import { formatNumber } from '../utils/formatNumber';
 
 const NumberComponent = (props) => {
 	return (
-		<View style={styles.numberComponent}>
+		<View style={repositoryItemStyles.numberComponent}>
 			<Text fontWeight='bold'>{formatNumber(props.num)}</Text>
 			<Text color='textSecondary'>{props.title}</Text>
 		</View>
@@ -79,14 +15,14 @@ const NumberComponent = (props) => {
 
 const InfoComponent = ({ name, description, language }) => {
 	return (
-		<View style={styles.info}>
+		<View style={repositoryItemStyles.info}>
 			<Text fontSize='subheading' fontWeight='bold'>
 				{name}
 			</Text>
-			<View style={styles.description}>
+			<View style={repositoryItemStyles.description}>
 				<Text color='textSecondary'>{description}</Text>
 			</View>
-			<View style={styles.languageChip}>
+			<View style={repositoryItemStyles.languageChip}>
 				<Text style={{ color: 'white' }}>{language}</Text>
 			</View>
 		</View>
@@ -95,9 +31,9 @@ const InfoComponent = ({ name, description, language }) => {
 
 const RepositoryItem = ({ repositoryObject, urlButton }) => {
 	return (
-		<View testID='repositoryItem' style={styles.container}>
+		<View testID='repositoryItem' style={repositoryItemStyles.container}>
 			<Image
-				style={styles.image}
+				style={repositoryItemStyles.image}
 				source={{ uri: repositoryObject.ownerAvatarUrl }}
 				alt="Repository author's avatar image"
 			/>
@@ -106,7 +42,7 @@ const RepositoryItem = ({ repositoryObject, urlButton }) => {
 				description={repositoryObject.description}
 				language={repositoryObject.language}
 			/>
-			<View style={styles.numbersSection}>
+			<View style={repositoryItemStyles.numbersSection}>
 				<NumberComponent num={repositoryObject.forksCount} title='Forks' />
 				<NumberComponent num={repositoryObject.stargazersCount} title='Stars' />
 				<NumberComponent num={repositoryObject.reviewCount} title='Reviews' />
@@ -114,7 +50,7 @@ const RepositoryItem = ({ repositoryObject, urlButton }) => {
 			</View>
 			{urlButton && (
 				<Pressable
-					style={styles.urlButton}
+					style={repositoryItemStyles.urlButton}
 					onPress={() => openURL(repositoryObject.url)}
 				>
 					<Text fontWeight='bold' style={{ color: 'white' }}>

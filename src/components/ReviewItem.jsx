@@ -1,67 +1,17 @@
 import { format } from 'date-fns';
-import { Pressable, View, StyleSheet } from 'react-native';
+import { Pressable, View } from 'react-native';
 import Text from './Text';
-import theme from '../theme';
-
-const styles = StyleSheet.create({
-	container: {
-		padding: 20,
-		maxWidth: 460,
-		display: 'flex',
-		flexDirection: 'row',
-		flexWrap: 'wrap',
-		gap: 20,
-		backgroundColor: 'white',
-		marginTop: 10,
-	},
-	rating: {
-		width: 50,
-		height: 50,
-		borderColor: theme.colors.primary,
-		borderRadius: 25,
-		borderWidth: 2,
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
-	info: {
-		padding: 5,
-		display: 'flex',
-		justifyContent: 'space-evenly',
-		alignItems: 'flex-start',
-		gap: 5,
-	},
-	viewButton: {
-		borderRadius: 5,
-		backgroundColor: theme.colors.primary,
-		padding: 10,
-		alignItems: 'center',
-		width: 125,
-	},
-	deleteButton: {
-		borderRadius: 5,
-		backgroundColor: theme.colors.error,
-		padding: 10,
-		alignItems: 'center',
-		width: 125,
-	},
-	actions: {
-		display: 'flex',
-		flexDirection: 'row',
-		flexWrap: 'wrap',
-		flex: 1,
-		gap: 20,
-	},
-});
+import { reviewItemStyles } from '../styles/reviewItemStyles';
 
 const ReviewActions = ({ onView, onDelete }) => {
 	return (
-		<View style={styles.actions}>
-			<Pressable onPress={onView} style={styles.viewButton}>
+		<View style={reviewItemStyles.actions}>
+			<Pressable onPress={onView} style={reviewItemStyles.viewButton}>
 				<Text fontWeight='bold' style={{ color: 'white' }}>
 					View repository
 				</Text>
 			</Pressable>
-			<Pressable onPress={onDelete} style={styles.deleteButton}>
+			<Pressable onPress={onDelete} style={reviewItemStyles.deleteButton}>
 				<Text fontWeight='bold' style={{ color: 'white' }}>
 					Delete review
 				</Text>
@@ -72,11 +22,11 @@ const ReviewActions = ({ onView, onDelete }) => {
 
 const ReviewItem = ({ review, byNameOf, onView, onDelete }) => {
 	return (
-		<View style={styles.container}>
-			<View style={styles.rating}>
+		<View style={reviewItemStyles.container}>
+			<View style={reviewItemStyles.rating}>
 				<Text fontWeight='bold'>{review.rating}</Text>
 			</View>
-			<View style={styles.info}>
+			<View style={reviewItemStyles.info}>
 				<Text fontSize='subheading' fontWeight='bold'>
 					{byNameOf === 'user'
 						? review.user.username
