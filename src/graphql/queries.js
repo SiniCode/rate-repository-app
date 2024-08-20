@@ -46,6 +46,7 @@ export const CURRENT_USER = gql`
 						...ReviewInfo
 						repository {
 							fullName
+							id
 						}
 					}
 				}

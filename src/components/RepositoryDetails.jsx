@@ -1,65 +1,12 @@
 import { useParams } from 'react-router-native';
-import { format } from 'date-fns';
-import { FlatList, View, StyleSheet } from 'react-native';
+import { FlatList } from 'react-native';
 import Text from './Text';
-import theme from '../theme';
 import useRepository from '../hooks/useRepository';
 import RepositoryItem from './RepositoryItem';
-
-const styles = StyleSheet.create({
-	container: {
-		padding: 20,
-		maxWidth: 460,
-		display: 'flex',
-		flexDirection: 'row',
-		flexWrap: 'wrap',
-		gap: 20,
-		backgroundColor: 'white',
-		marginTop: 10,
-	},
-	rating: {
-		width: 50,
-		height: 50,
-		borderColor: theme.colors.primary,
-		borderRadius: 25,
-		borderWidth: 2,
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
-	info: {
-		padding: 5,
-		display: 'flex',
-		justifyContent: 'space-evenly',
-		alignItems: 'flex-start',
-		gap: 5,
-	},
-});
+import ReviewItem from './ReviewItem';
 
 const RepositoryInfo = ({ repository }) => {
 	return <RepositoryItem repositoryObject={repository} urlButton={true} />;
-};
-
-export const ReviewItem = ({ review, byNameOf }) => {
-	return (
-		<View style={styles.container}>
-			<View style={styles.rating}>
-				<Text fontWeight='bold'>{review.rating}</Text>
-			</View>
-			<View style={styles.info}>
-				<Text fontSize='subheading' fontWeight='bold'>
-					{byNameOf === 'user'
-						? review.user.username
-						: review.repository.fullName}
-				</Text>
-				<Text color='textSecondary'>
-					{format(new Date(review.createdAt), 'dd/MM/yyyy')}
-				</Text>
-			</View>
-			<View style={{ width: '100%' }}>
-				<Text>{review.text}</Text>
-			</View>
-		</View>
-	);
 };
 
 const RepositoryDetails = () => {
